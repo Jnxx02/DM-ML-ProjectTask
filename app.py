@@ -1,67 +1,58 @@
 import streamlit as st
 import pandas as pd
-import joblib
-from utils import preprocess_data
+import pickle
+from utils import preprocess_input_data
 
-# Memuat model yang telah dilatih
-# model = joblib.load('model/fraud_model.pkl')
+# Load model
+with open('model.pkl', 'rb') as file:
+    model = pickle.load(file)
+
+# Mapping dictionaries
+month_mapping = {
+    'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+    'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+}
+
+day_of_week_mapping = {
+    'Monday': 0, 'Tuesday': 1, 'Wednesday': 2, 'Thursday': 3,
+    'Friday': 4, 'Saturday': 5, 'Sunday': 6
+}
+
+day_of_week_claimed_mapping = {
+    '0': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4,
+    'Friday': 5, 'Saturday': 6, 'Sunday': 7
+}
 
 # Menampilkan judul aplikasi
-st.title("Fraud Detection on Transactions")
+st.title("Vehicle Insurance Claim Fraud Detection")
 
-# Membuat form untuk input data pengguna
-st.header("Input Transaction Data")
-with st.form("transaction_form"):
-    # Input untuk atribut yang diperlukan
-    policy_type_sedan_collision = st.number_input("Policy Type - Sedan Collision", min_value=0.0, step=0.1)
-    days_policy_claim = st.number_input("Days Policy Claim", min_value=0, step=1)
-    gender = st.selectbox("Gender", options=["Male", "Female"])
-    deductible = st.number_input("Deductible", min_value=0, step=1)
-    week_of_month_claimed = st.number_input("Week of Month Claimed", min_value=0, step=1)
-    week_of_month = st.number_input("Week of Month", min_value=0, step=1)
-    day_of_week_claimed = st.number_input("Day of Week Claimed", min_value=0, step=1)
-    policy_type_utility_liability = st.number_input("Policy Type - Utility Liability", min_value=0.0, step=0.1)
-    age = st.number_input("Age", min_value=0, step=1)
-    day_of_week = st.number_input("Day of Week", min_value=0, step=1)
-    month = st.number_input("Month", min_value=0, step=1)
-    month_claimed = st.number_input("Month Claimed", min_value=0, step=1)
-    fraud_found_p = st.number_input("Fraud Found P", min_value=0.0, step=0.1)
-    
-    # Tombol untuk submit form
-    submit_button = st.form_submit_button(label="Check for Fraud")
+# Input dari pengguna
+month = st.selectbox("Month of Incident (Bulan saat kejadian)", list(month_mapping.keys()), help="Bulan saat kejadian atau klaim terjadi. Ini bisa membantu dalam mengidentifikasi pola musiman dalam kasus kecurangan.")
+day_of_week = st.selectbox("Day of Week of Incident (Hari dalam minggu saat kejadian)", list(day_of_week_mapping.keys()), help="Hari dalam minggu saat kejadian terjadi. Tanggal kejadian bisa mengungkapkan pola kecurangan.")
+policy_type_utility_liability = st.selectbox("Policy Type Utility - Liability (Jenis polis)", ["Yes", "No"], help="Jenis polis, khususnya polis utilitas dan tanggung jawab. Jenis polis bisa mempengaruhi kecenderungan kecurangan.")
+age = st.slider("Age (Usia)", 17, 65, help="Usia pemegang polis atau yang terlibat dalam kejadian. Usia bisa memberikan indikasi tentang pola klaim.")
+day_of_week_claimed = st.selectbox("Day of Week Claimed (Hari dalam minggu saat klaim diajukan)", list(day_of_week_claimed_mapping.keys()), help="Hari dalam minggu saat klaim diajukan. Ini bisa digunakan untuk melihat apakah klaim diajukan pada hari-hari tertentu lebih sering.")
+week_of_month = st.slider("Week of Month of Incident (Minggu dalam bulan saat kejadian)", 1, 5, help="Minggu dalam bulan saat kejadian terjadi. Ini bisa menunjukkan apakah ada pola tertentu dalam minggu bulan saat kecurangan terjadi.")
+week_of_month_claimed = st.slider("Week of Month Claimed (Minggu dalam bulan saat klaim diajukan)", 1, 5, help="Minggu dalam bulan saat klaim diajukan. Sama dengan WeekOfMonth, tapi untuk klaim yang diajukan.")
 
-# Memproses data input dan melakukan prediksi
-if submit_button:
-    # Mengonversi gender menjadi nilai numerik
-    if gender == "Male":
-        gender_value = 1.0
-    elif gender == "Female":
-        gender_value = 0.0
-    
-    # Membuat DataFrame dari data input
-    input_data = pd.DataFrame({
-        'PolicyType_Sedan_Collision': [policy_type_sedan_collision],
-        'Days_Policy_Claim': [days_policy_claim],
-        'Gender': [gender_value],
-        'Deductible': [deductible],
-        'WeekOfMonthClaimed': [week_of_month_claimed],
-        'WeekOfMonth': [week_of_month],
-        'DayOfWeekClaimed': [day_of_week_claimed],
-        'PolicyType_Utility_Liability': [policy_type_utility_liability],
-        'Age': [age],
-        'DayOfWeek': [day_of_week],
-        'Month': [month],
-        'MonthClaimed': [month_claimed],
-        'FraudFound_P': [fraud_found_p]
-    })
-    
-    # Memproses data input menggunakan fungsi preprocess_data
-    processed_data, _ = preprocess_data(input_data)
-    # Melakukan prediksi menggunakan model
-    prediction = model.predict(processed_data)
-    
-    # Menampilkan hasil prediksi
-    if prediction[0] == 1:
-        st.error("This transaction is likely to be fraudulent.")
-    else:
-        st.success("This transaction is not fraudulent.")
+# Preprocess input
+input_data = {
+    'Month': month_mapping[month],
+    'DayOfWeek': day_of_week_mapping[day_of_week],
+    'PolicyType_Utility - Liability': 1 if policy_type_utility_liability == "Yes" else 0,
+    'Age': age,
+    'DayOfWeekClaimed': day_of_week_claimed_mapping[day_of_week_claimed],
+    'WeekOfMonth': week_of_month,
+    'WeekOfMonthClaimed': week_of_month_claimed
+}
+
+# Convert to DataFrame
+input_df = pd.DataFrame([input_data])
+
+# Preprocess data
+preprocessed_data = preprocess_input_data(input_df)
+
+# Predict
+if st.button("Predict"):
+    prediction = model.predict(preprocessed_data)
+    st.write("Prediction: ", "Fraud" if prediction[0] == 1 else "Not Fraud")

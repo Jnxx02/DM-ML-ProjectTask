@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
-import joblib
+import pickle
 
 # Fungsi untuk memuat data dari file CSV
 def load_data(filepath):
@@ -30,12 +30,19 @@ def train_model(features, target):
     # Mencetak laporan klasifikasi
     print(classification_report(y_test, predictions))
     # Menyimpan model yang telah dilatih ke dalam file
-    joblib.dump(model, 'model/fraud_model.pkl')
+    with open('model/fraud_model.pkl', 'wb') as file:
+        pickle.dump(model, file)
+
+# Fungsi untuk preprocessing data input dari aplikasi Streamlit
+def preprocess_input_data(input_df):
+    # Lakukan preprocessing sesuai kebutuhan
+    # Misalnya, jika ada fitur yang perlu diubah atau di-scaling, lakukan di sini
+    return input_df
 
 # Bagian utama program
 if __name__ == "__main__":
     # Memuat data dari file CSV
-    data = load_data('data/vehicle_claim.csv')
+    data = load_data('dataset/fraud_orcale.csv')
     # Melakukan preprocessing data
     features, target = preprocess_data(data)
     # Melatih model dengan data yang telah diproses
