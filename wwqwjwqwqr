@@ -1,0 +1,95 @@
+[33mcommit 4fb7cfc0f06bb8e490fcbcdc753c72856229002c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: riooorante <rantetadungrio@gmail.com>
+Date:   Fri Jun 21 18:09:48 2024 +0800
+
+    feat: add initial ML scripts
+
+[33mcommit d253614c06d5bb7bce293361a11ba4a8982d87a1[m
+Author: riooorante <rantetadungrio@gmail.com>
+Date:   Fri Jun 21 18:07:56 2024 +0800
+
+    feat: add initial ML scripts
+
+[33mcommit c9282111d863866c37f001b85a44f7d3cf5bd754[m
+Author: riooorante <rantetadungrio@gmail.com>
+Date:   Fri Jun 21 17:59:41 2024 +0800
+
+    feat: delete old dataset
+
+[33mcommit 7ccc60da6791ed78d06fb6de28b4b09e587368a1[m
+Author: riooorante <rantetadungrio@gmail.com>
+Date:   Fri Jun 21 17:58:07 2024 +0800
+
+    feat: add initial scripts for ML model development
+
+[33mcommit 1c395aec86e319c3ead279ab0b86018d57238a8d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Jonathan Kwan <113575528+Jnxx02@users.noreply.github.com>
+Date:   Fri Jun 21 17:50:42 2024 +0800
+
+    Delete __pycache__ directory
+
+[33mcommit e89b43a0b521dbc363149eca35f2951f1d388c58[m
+Author: Jonathan Kwan <113575528+Jnxx02@users.noreply.github.com>
+Date:   Fri Jun 21 17:50:24 2024 +0800
+
+    Delete myenv directory
+
+[33mcommit ad36668358d8801297364e2a12a47e5627f0940c[m
+Author: Jonathan Kwan <jonathankwan056@gmail.com>
+Date:   Fri Jun 21 17:25:02 2024 +0800
+
+    fix: web details
+
+[33mcommit 8084895b9f768839daa46f56d430d7436882fecf[m
+Author: Jonathan Kwan <jonathankwan056@gmail.com>
+Date:   Fri Jun 21 16:57:11 2024 +0800
+
+    fix: remove utils.py
+
+[33mcommit cdd9ab4b12944aed8926607079bc5d160a2761c1[m
+Author: Jonathan Kwan <jonathankwan056@gmail.com>
+Date:   Fri Jun 21 16:54:21 2024 +0800
+
+    fix: adding models and improving web appearance
+
+[33mcommit a3cb5c4c31d51c9ec51fa177a659b5362bed456d[m
+Author: Jonathan Kwan <jonathankwan056@gmail.com>
+Date:   Fri Jun 21 14:35:09 2024 +0800
+
+    fix: user input
+
+[33mcommit caad94456fcd15f3445870ee58e77fdc333ec89f[m
+Author: Jonathan Kwan <113575528+Jnxx02@users.noreply.github.com>
+Date:   Thu Jun 20 21:38:07 2024 +0800
+
+    feat: README.md
+
+[33mcommit 99a1d69dcc5d051f62040f43e393760e6d80ffb6[m
+Author: Jonathan Kwan <jonathankwan056@gmail.com>
+Date:   Thu Jun 20 21:18:30 2024 +0800
+
+    feat: backend
+
+[33mcommit 00e2b757b70abbdcd6d83f41ca3efe51e2e51d3a[m
+Author: Jonathan Kwan <113575528+Jnxx02@users.noreply.github.com>
+Date:   Wed Jun 12 11:07:27 2024 +0800
+
+    fix: README.md
+
+[33mcommit 8bc097b9cce25bbbd124f217ed0e5a85bf69b042[m
+Author: Jonathan Kwan <113575528+Jnxx02@users.noreply.github.com>
+Date:   Tue Jun 11 20:14:30 2024 +0800
+
+    fix: README.md
+
+[33mcommit d682e40982cb1bb111424215dc46c8009a5143bd[m
+Author: Jonathan Kwan <113575528+Jnxx02@users.noreply.github.com>
+Date:   Tue Jun 11 20:12:03 2024 +0800
+
+    fix: README.md
+
+[33mcommit 7bcf083450f84521786c60a24a58d5ef22c7bb52[m
+Author: Jonathan Kwan <jonathankwan056@gmail.com>
+Date:   Tue Jun 11 20:02:43 2024 +0800
+
+    first commit

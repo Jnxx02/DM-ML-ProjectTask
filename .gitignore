@@ -1,0 +1,43 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# Mengabaikan direktori lingkungan virtual
+venv/
+myenv/
+
+# Mengabaikan file dan direktori konfigurasi IDE
+.idea/
+__pycache__/
+
+# Mengabaikan file data yang mungkin berukuran besar atau tidak penting untuk repo
+catboost_info/
+
+# Mengabaikan file Python yang dihasilkan otomatis
+*.pyc
+*.pyo
+*.pyd
+
+# Mengabaikan file model yang biasanya besar dan di-generate
+*.pkl
+
+# Mengabaikan file Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Mengabaikan file log
+*.log
+
+# Mengabaikan file sementara yang dihasilkan editor atau sistem operasi
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Mengabaikan file lingkungan khusus (jika ada)
+.env
