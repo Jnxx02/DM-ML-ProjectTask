@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-from utils import preprocess_input_data
 
 # Load model
 with open('model.pkl', 'rb') as file:
@@ -19,7 +18,7 @@ day_of_week_mapping = {
 }
 
 day_of_week_claimed_mapping = {
-    '0': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4,
+    'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4,
     'Friday': 5, 'Saturday': 6, 'Sunday': 7
 }
 
@@ -49,10 +48,7 @@ input_data = {
 # Convert to DataFrame
 input_df = pd.DataFrame([input_data])
 
-# Preprocess data
-preprocessed_data = preprocess_input_data(input_df)
-
 # Predict
 if st.button("Predict"):
-    prediction = model.predict(preprocessed_data)
+    prediction = model.predict(input_df)
     st.write("Prediction: ", "Fraud" if prediction[0] == 1 else "Not Fraud")
