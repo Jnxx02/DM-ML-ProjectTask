@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import pickle
 
+# Set page configuration
+st.set_page_config(page_title="Vehicle Insurance Fraud Detection", page_icon="🚗")
+
 # Load model
 with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
@@ -54,7 +57,7 @@ input_data = {
 # Convert to DataFrame
 input_df = pd.DataFrame([input_data])
 
-# Predict
+# Layout for prediction result
 if st.button("Predict"):
     prediction = model.predict(input_df)
     st.markdown("### Prediction Result")
