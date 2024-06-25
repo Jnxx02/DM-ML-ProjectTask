@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import matplotlib.pyplot as plt
 
 # Set page configuration
 st.set_page_config(page_title="Vehicle Insurance Fraud Detection", page_icon="🚗")
