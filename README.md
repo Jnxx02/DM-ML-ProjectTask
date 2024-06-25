@@ -2,10 +2,10 @@
 This web application detects fraud in transactions by allowing users to input transaction data through a form. The data is then sent to the server for processing using a machine learning model to determine whether the transaction is fraudulent. The classification result is immediately returned and displayed to the user on the same page.
 
 ## Group Member:
-- Mario Valerian Rante Ta'dung - H071221075
-- Jonathan Kwan - H071221067
-- Henokh Abhinaya Tjahjadi - H071221045
-- Rahmatia - H071221004
+- [Mario Valerian Rante Ta'dung - H071221075](https://github.com/riooorante)
+- [Jonathan Kwan - H071221067](https://github.com/Jnxx02)
+- [Henokh Abhinaya Tjahjadi - H071221045](https://github.com/HenokhIS)
+- [Rahmatia - H071221004](https://github.com/rahmatia20april)
 
 ## Repository Structure
 🚗 DM-ML-ProjectTask
