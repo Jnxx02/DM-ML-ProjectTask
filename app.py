@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import matplotlib.pyplot as plt
 
 # Set page configuration
 st.set_page_config(page_title="Vehicle Insurance Fraud Detection", page_icon="🚗")
@@ -28,20 +29,51 @@ day_of_week_claimed_mapping = {
 # Menampilkan judul aplikasi
 st.title("🚗 Vehicle Insurance Claim Fraud Detection")
 st.markdown("## Welcome to the Fraud Detection App")
-st.markdown("This application helps in detecting fraudulent vehicle insurance claims.")
+st.markdown("This web application can detect fraud in accident insurance claims by allowing users to input transaction data through a form. The data is then sent to the server to be processed using a machine learning model to determine whether the transaction is fake or not. The classification results are immediately returned and displayed to the user on the same page.")
+
+# Menampilkan informasi mengenai Vehicle Insurance Claim Fraud
+st.markdown("## About Vehicle Insurance Claim Fraud")
+st.markdown("""
+Vehicle insurance claim fraud is a significant issue that affects insurance companies and policyholders alike. Here are some key points about vehicle insurance claim fraud:
+
+- **Definition**: Vehicle insurance claim fraud involves providing false information or exaggerating details in an insurance claim to receive compensation that is not deserved.
+- **Common Types**:
+  - **Staged Accidents**: Deliberately causing an accident to file a claim.
+  - **Exaggerated Claims**: Inflating the extent of damages or injuries.
+  - **False Claims**: Filing claims for accidents or damages that never occurred.
+- **Statistics**:
+  - According to a study published in ScienceDirect, fraud accounts for a significant portion of the property-casualty insurance industry's incurred losses and loss adjustment expenses each year.
+  - The FBI estimates that the total cost of insurance fraud (non-health insurance) is more than $40 billion per year.
+- **Impact**:
+  - Increases insurance premiums for all policyholders.
+  - Leads to higher operational costs for insurance companies.
+  - Can result in legal consequences for those caught committing fraud.
+- **Detection Methods**:
+  - **Data Analysis**: Using machine learning models to identify patterns and anomalies in claims data.
+  - **Investigation**: Conducting thorough investigations of suspicious claims.
+  - **Collaboration**: Sharing information between insurance companies and law enforcement agencies.
+
+By understanding the nature and impact of vehicle insurance claim fraud, we can better appreciate the importance of detection and prevention efforts.
+""")
+
+st.markdown("## References")
+st.markdown("""
+- [ScienceDirect Study on Insurance Fraud](https://www.sciencedirect.com/science/article/abs/pii/S0275531922001556)
+- [FBI Insurance Fraud](https://www.fbi.gov/stats-services/publications/insurance-fraud)
+""")
 
 # Sidebar for user input
-st.sidebar.header("User Input Parameters")
-st.sidebar.markdown("Please provide the following details:")
+st.sidebar.header("Input Parameters for Fraud Detection")
+st.sidebar.markdown("Please provide the following details to help us detect potential fraud in vehicle insurance claims:")
 
-# Input dari pengguna
-month = st.sidebar.selectbox("Month of Incident (Bulan saat kejadian)", list(month_mapping.keys()), help="Bulan saat kejadian atau klaim terjadi. Ini bisa membantu dalam mengidentifikasi pola musiman dalam kasus kecurangan.")
-day_of_week = st.sidebar.selectbox("Day of Week of Incident (Hari dalam minggu saat kejadian)", list(day_of_week_mapping.keys()), help="Hari dalam minggu saat kejadian terjadi. Tanggal kejadian bisa mengungkapkan pola kecurangan.")
-policy_type_utility_liability = st.sidebar.selectbox("Policy Type Utility - Liability (Jenis polis)", ["Yes", "No"], help="Jenis polis, khususnya polis utilitas dan tanggung jawab. Jenis polis bisa mempengaruhi kecenderungan kecurangan.")
-age = st.sidebar.slider("Age (Usia)", 18, 65, help="Usia pemegang polis atau yang terlibat dalam kejadian. Usia bisa memberikan indikasi tentang pola klaim.")
-day_of_week_claimed = st.sidebar.selectbox("Day of Week Claimed (Hari dalam minggu saat klaim diajukan)", list(day_of_week_claimed_mapping.keys()), help="Hari dalam minggu saat klaim diajukan. Ini bisa digunakan untuk melihat apakah klaim diajukan pada hari-hari tertentu lebih sering.")
-week_of_month = st.sidebar.slider("Week of Month of Incident (Minggu dalam bulan saat kejadian)", 1, 5, help="Minggu dalam bulan saat kejadian terjadi. Ini bisa menunjukkan apakah ada pola tertentu dalam minggu bulan saat kecurangan terjadi.")
-week_of_month_claimed = st.sidebar.slider("Week of Month Claimed (Minggu dalam bulan saat klaim diajukan)", 1, 5, help="Minggu dalam bulan saat klaim diajukan. Sama dengan WeekOfMonth, tapi untuk klaim yang diajukan.")
+# User input
+month = st.sidebar.selectbox("Month of Incident", list(month_mapping.keys()), help="Month when the incident or claim occurred. This can help identify seasonal patterns in fraud cases.")
+day_of_week = st.sidebar.selectbox("Day of Week of Incident", list(day_of_week_mapping.keys()), help="Day of the week when the incident occurred. The date of the incident can reveal fraud patterns.")
+policy_type_utility_liability = st.sidebar.selectbox("Policy Type Utility - Liability", ["Yes", "No"], help="Type of policy, specifically utility and liability policies. The type of policy can influence fraud tendencies.")
+age = st.sidebar.slider("Age", 18, 59, help="Age of the policyholder or those involved in the incident. Age can provide indications about claim patterns.")
+day_of_week_claimed = st.sidebar.selectbox("Day of Week Claimed", list(day_of_week_claimed_mapping.keys()), help="Day of the week when the claim was filed. This can be used to see if claims are filed more frequently on certain days.")
+week_of_month = st.sidebar.slider("Week of Month of Incident", 1, 5, help="Week of the month when the incident occurred. This can show if there are specific patterns in the week of the month when fraud occurs.")
+week_of_month_claimed = st.sidebar.slider("Week of Month Claimed", 1, 5, help="Week of the month when the claim was filed. Similar to WeekOfMonth, but for filed claims.")
 
 # Preprocess input
 input_data = {
@@ -57,8 +89,8 @@ input_data = {
 # Convert to DataFrame
 input_df = pd.DataFrame([input_data])
 
-# Layout for prediction result
-if st.button("Predict"):
+# Sidebar for prediction result
+if st.sidebar.button("Predict"):
     prediction = model.predict(input_df)
-    st.markdown("### Prediction Result")
-    st.write("Prediction: ", "🚨 Fraud" if prediction[0] == 1 else "✅ Not Fraud")
+    st.sidebar.markdown("### Prediction Result")
+    st.sidebar.write("Prediction: ", "🚨 Fraud" if prediction[0] == 1 else "✅ Not Fraud")
