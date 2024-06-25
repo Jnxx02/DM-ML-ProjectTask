@@ -1,5 +1,5 @@
 # 🚗 DM-ML-ProjectTask
-This web application detects fraud in transactions by allowing users to input transaction data through a form. The data is then sent to the server for processing using a machine learning model to determine whether the transaction is fraudulent. The classification result is immediately returned and displayed to the user on the same page.
+This web application can detect fraud in accident insurance claims by allowing users to input transaction data through a form. The data is then sent to the server to be processed using a machine learning model to determine whether the transaction is fake or not. The classification results are immediately returned and displayed to the user on the same page.
 
 ## Group Member:
 - [Mario Valerian Rante Ta'dung - H071221075](https://github.com/riooorante)
