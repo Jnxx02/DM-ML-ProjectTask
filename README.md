@@ -21,18 +21,26 @@ This web application can detect fraud in accident insurance claims by allowing u
 
 ## How to Run the Streamlit Application
 1. Clone this repository to your computer:
+   
    ```bash
    git clone https://github.com/Jnxx02/DM-ML-ProjectTask.git
    cd DM-ML-ProjectTask
+
 2. Create and activate a virtual environment:
+   
    ```bash
    python -m venv env
    source env/bin/activate   # Untuk pengguna macOS/Linux
    .\env\Scripts\activate    # Untuk pengguna Windows
-4. Install the necessary dependencies:
+
+3. Install the necessary dependencies:
+   
    ```bash
    pip install -r requirements.txt
-5. Run the Streamlit application:
+
+4. Run the Streamlit application:
+   
    ```bash
    streamlit run app.py
-6. Open your browser and access `http://localhost:8501` to view the application.
+
+5. Open your browser and access `http://localhost:8501` to view the application.
