@@ -1,4 +1,4 @@
-# DM-ML-ProjectTask 🚗
+# 🚗 DM-ML-ProjectTask
 This web application detects fraud in transactions by allowing users to input transaction data through a form. The data is then sent to the server for processing using a machine learning model to determine whether the transaction is fraudulent. The classification result is immediately returned and displayed to the user on the same page.
 
 ## Group Member:
@@ -8,7 +8,7 @@ This web application detects fraud in transactions by allowing users to input tr
 - Rahmatia - H071221004
 
 ## Repository Structure
-DM-ML-ProjectTask 🚗
+🚗 DM-ML-ProjectTask
 - ├── Data
 - │ └── fraud_oracle.csv
 - ├── notebook
