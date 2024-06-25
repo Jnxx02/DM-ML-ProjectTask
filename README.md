@@ -9,7 +9,7 @@ This web application can detect fraud in accident insurance claims by allowing u
 
 ## Repository Structure
 🚗 DM-ML-ProjectTask
-- ├── Data
+- ├── data
 - │ └── fraud_oracle.csv
 - ├── notebook
 - │ └── modeling.ipynb
