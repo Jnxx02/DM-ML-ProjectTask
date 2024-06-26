@@ -23,8 +23,6 @@ catboost_info/
 *.pyo
 *.pyd
 
-# Mengabaikan file model yang biasanya besar dan di-generate
-*.pkl
 
 # Mengabaikan file Jupyter Notebook checkpoints
 .ipynb_checkpoints/
