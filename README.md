@@ -32,8 +32,8 @@ This web application can detect fraud in accident insurance claims by allowing u
    
    ```bash
    python -m venv env
-   source env/bin/activate   # Untuk pengguna macOS/Linux
-   .\env\Scripts\activate    # Untuk pengguna Windows
+   source env/bin/activate   # For macOS/Linux user
+   .\env\Scripts\activate    # For Windows user
 
 3. Install the necessary dependencies:
    
