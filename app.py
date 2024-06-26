@@ -6,7 +6,7 @@ import pickle
 st.set_page_config(page_title="Vehicle Insurance Fraud Detection", page_icon="🚗")
 
 # Load model
-with open('model_extra.pkl', 'rb') as file:
+with open('model/model_extra.pkl', 'rb') as file:
     model = pickle.load(file)
 
 # Mapping dictionaries
@@ -98,7 +98,7 @@ input_data = {
     'WeekOfMonthClaimed': week_of_month_claimed,
     'Deductible': deductible,
     'NumberOfCars': number_of_cars,
-    'Days_Policy_Claim': days_policy_claim,
+    'Days_Policy_Claim': days_policy_claim_mapping[days_policy_claim],
     'Sex_Male': gender_mapping[gender]
 }
 
