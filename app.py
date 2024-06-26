@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import matplotlib.pyplot as plt
 
 # Set page configuration
 st.set_page_config(page_title="Vehicle Insurance Fraud Detection", page_icon="🚗")
@@ -23,6 +24,10 @@ day_of_week_mapping = {
 day_of_week_claimed_mapping = {
     'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4,
     'Friday': 5, 'Saturday': 6, 'Sunday': 7
+}
+
+gender_mapping = {
+    'Female': 0, 'Male': 1
 }
 
 # Menampilkan judul aplikasi
@@ -53,10 +58,8 @@ Vehicle insurance claim fraud is a significant issue that affects insurance comp
   - **Collaboration**: Sharing information between insurance companies and law enforcement agencies.
 
 By understanding the nature and impact of vehicle insurance claim fraud, we can better appreciate the importance of detection and prevention efforts.
-""")
 
-st.markdown("## References")
-st.markdown("""
+**References**:
 - [ScienceDirect Study on Insurance Fraud](https://www.sciencedirect.com/science/article/abs/pii/S0275531922001556)
 - [FBI Insurance Fraud](https://www.fbi.gov/stats-services/publications/insurance-fraud)
 """)
@@ -73,6 +76,10 @@ age = st.sidebar.slider("Age", 18, 59, help="Age of the policyholder or those in
 day_of_week_claimed = st.sidebar.selectbox("Day of Week Claimed", list(day_of_week_claimed_mapping.keys()), help="Day of the week when the claim was filed. This can be used to see if claims are filed more frequently on certain days.")
 week_of_month = st.sidebar.slider("Week of Month of Incident", 1, 5, help="Week of the month when the incident occurred. This can show if there are specific patterns in the week of the month when fraud occurs.")
 week_of_month_claimed = st.sidebar.slider("Week of Month Claimed", 1, 5, help="Week of the month when the claim was filed. Similar to WeekOfMonth, but for filed claims.")
+gender = st.sidebar.selectbox("Gender", list(gender_mapping.keys()), help="Gender of the policyholder. Gender can sometimes influence the likelihood of fraud.")
+day_policy_claim = st.sidebar.selectbox("Day Policy Claim", list(day_of_week_claimed_mapping.keys()), help="Day when the policy claim was made. This can help identify patterns in claim filing.")
+number_of_cars = st.sidebar.slider("Number of Cars", 1, 5, help="Number of cars involved in the incident. The number of cars can be an indicator of the scale of the incident.")
+deductible = st.sidebar.slider("Deductible", 0, 1000, step=50, help="Deductible amount for the insurance policy. The deductible can influence the likelihood of fraud.")
 
 # Preprocess input
 input_data = {
@@ -82,7 +89,11 @@ input_data = {
     'Age': age,
     'DayOfWeekClaimed': day_of_week_claimed_mapping[day_of_week_claimed],
     'WeekOfMonth': week_of_month,
-    'WeekOfMonthClaimed': week_of_month_claimed
+    'WeekOfMonthClaimed': week_of_month_claimed,
+    'Sex_Male': gender_mapping[gender],
+    'Day_Policy_Claim': day_policy_claim,
+    'NumberOfCars': number_of_cars,
+    'Deductible': deductible
 }
 
 # Convert to DataFrame
