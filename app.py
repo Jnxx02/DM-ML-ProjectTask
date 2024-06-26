@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import matplotlib.pyplot as plt
 
 # Set page configuration
 st.set_page_config(page_title="Vehicle Insurance Fraud Detection", page_icon="🚗")
@@ -24,6 +23,13 @@ day_of_week_mapping = {
 day_of_week_claimed_mapping = {
     'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4,
     'Friday': 5, 'Saturday': 6, 'Sunday': 7
+}
+
+days_policy_claim_mapping = {
+    'none': 0,
+    '8 to 15': 1,
+    '15 to 30': 2,
+    'more than 30': 3
 }
 
 gender_mapping = {
@@ -72,28 +78,28 @@ st.sidebar.markdown("Please provide the following details to help us detect pote
 month = st.sidebar.selectbox("Month of Incident", list(month_mapping.keys()), help="Month when the incident or claim occurred. This can help identify seasonal patterns in fraud cases.")
 day_of_week = st.sidebar.selectbox("Day of Week of Incident", list(day_of_week_mapping.keys()), help="Day of the week when the incident occurred. The date of the incident can reveal fraud patterns.")
 policy_type_utility_liability = st.sidebar.selectbox("Policy Type Utility - Liability", ["Yes", "No"], help="Type of policy, specifically utility and liability policies. The type of policy can influence fraud tendencies.")
-age = st.sidebar.slider("Age", 18, 59, help="Age of the policyholder or those involved in the incident. Age can provide indications about claim patterns.")
 day_of_week_claimed = st.sidebar.selectbox("Day of Week Claimed", list(day_of_week_claimed_mapping.keys()), help="Day of the week when the claim was filed. This can be used to see if claims are filed more frequently on certain days.")
-week_of_month = st.sidebar.slider("Week of Month of Incident", 1, 5, help="Week of the month when the incident occurred. This can show if there are specific patterns in the week of the month when fraud occurs.")
+age = st.sidebar.slider("Age", 18, 59, help="Age of the policyholder or those involved in the incident. Age can provide indications about claim patterns.")
 week_of_month_claimed = st.sidebar.slider("Week of Month Claimed", 1, 5, help="Week of the month when the claim was filed. Similar to WeekOfMonth, but for filed claims.")
-gender = st.sidebar.selectbox("Gender", list(gender_mapping.keys()), help="Gender of the policyholder. Gender can sometimes influence the likelihood of fraud.")
-day_policy_claim = st.sidebar.selectbox("Day Policy Claim", list(day_of_week_claimed_mapping.keys()), help="Day when the policy claim was made. This can help identify patterns in claim filing.")
+week_of_month = st.sidebar.slider("Week of Month of Incident", 1, 5, help="Week of the month when the incident occurred. This can show if there are specific patterns in the week of the month when fraud occurs.")
+deductible = st.sidebar.selectbox("Deductible", [300, 400, 500, 700], help="Deductible amount for the insurance policy. The deductible can influence the likelihood of fraud.")
+days_policy_claim = st.sidebar.selectbox("Day Policy Claim", list(days_policy_claim_mapping.keys()), help="Day when the policy claim was made. This can help identify patterns in claim filing.")
 number_of_cars = st.sidebar.slider("Number of Cars", 1, 5, help="Number of cars involved in the incident. The number of cars can be an indicator of the scale of the incident.")
-deductible = st.sidebar.slider("Deductible", 0, 1000, step=50, help="Deductible amount for the insurance policy. The deductible can influence the likelihood of fraud.")
+gender = st.sidebar.selectbox("Gender", list(gender_mapping.keys()), help="Gender of the policyholder. Gender can sometimes influence the likelihood of fraud.")
 
 # Preprocess input
 input_data = {
     'Month': month_mapping[month],
     'DayOfWeek': day_of_week_mapping[day_of_week],
     'PolicyType_Utility - Liability': 1 if policy_type_utility_liability == "Yes" else 0,
-    'Age': age,
     'DayOfWeekClaimed': day_of_week_claimed_mapping[day_of_week_claimed],
-    'WeekOfMonth': week_of_month,
+    'Age': age,
     'WeekOfMonthClaimed': week_of_month_claimed,
-    'Sex_Male': gender_mapping[gender],
-    'Day_Policy_Claim': day_policy_claim,
+    'WeekOfMonth': week_of_month,
+    'Deductible': deductible,
+    'Days_Policy_Claim': days_policy_claim,
     'NumberOfCars': number_of_cars,
-    'Deductible': deductible
+    'Sex_Male': gender_mapping[gender]
 }
 
 # Convert to DataFrame
