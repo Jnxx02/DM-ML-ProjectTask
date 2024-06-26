@@ -1,4 +1,4 @@
-# 🚗 DM-ML-ProjectTask
+# 🚗 Vehicle Insurance Claim Fraud Detection
 This web application can detect fraud in accident insurance claims by allowing users to input transaction data through a form. The data is then sent to the server to be processed using a machine learning model to determine whether the transaction is fake or not. The classification results are immediately returned and displayed to the user on the same page.
 
 ## Group Member:
