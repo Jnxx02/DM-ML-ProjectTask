@@ -11,12 +11,14 @@ This web application can detect fraud in accident insurance claims by allowing u
 🚗 DM-ML-ProjectTask
 - ├── data
 - │ └── fraud_oracle.csv
+- ├── model
+- │ └── model_extra.pkl
 - ├── notebook
 - │ └── modeling.ipynb
+- ├── .gitattributes
 - ├── .gitignore
 - ├── README.md
 - ├── app.py
-- ├── model.pkl
 - └── requirements.txt
 
 ## How to Run the Streamlit Application
